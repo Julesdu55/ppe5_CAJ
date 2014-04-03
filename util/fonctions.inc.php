@@ -140,7 +140,14 @@ function getAllBugs(){
     $retour = array($tab1, $tab2);
     return $retour;
 }
+function getbugbyId($id){
 
+    require "bootstrap.php";
+    $bugRepository = $entityManager->getRepository('Bug');
+    $bugs =  $bugRepository->findBy(array('id' => $id));
+
+    return $bugs;
+}
 // Récupérer informations sur les techniciens et le responsable
 function getUsersByFunction(){
     require "bootstrap.php";

@@ -20,7 +20,13 @@ switch($action){
         include("vues/v_terminer.php");
         break;
     }
+    case 'description':{
+        $id=$_GET['id'];
+       $bugs= getbugbyId($id);
 
+        include("vues/v_description.php");
+        break;
+    }
 
     case 'cloture_Bug':{
         $the_bugs = getBugsForTechnicien($_SESSION['login']['id']);

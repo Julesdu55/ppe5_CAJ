@@ -33,16 +33,17 @@
 
 
         echo "<li> A réaliser Avant  ".$d->format('%a jours')."</li>";
-        echo "<li> <a href='http://127.0.0.1/ppe5_CAJ/index.php?uc=dash' onClick='ouvrirFenetre(".$bug->getid().",'description');'> Terminer </a></li>";
-        echo "<li> <a href='http://127.0.0.1/ppe5_CAJ/index.php?uc=dash' onClick='ouvrirFenetre(".$bug->getid().",'cloture');'> Terminer </a></li>";
+        echo "<li> <a href='http://127.0.0.1/ppe5_CAJ/index.php?uc=dash' onClick=ouvrirFenetre('".$bug->getid()."','description');> Description </a></li>";
+        echo "fffff";
+        echo "<li> <a href='http://127.0.0.1/ppe5_CAJ/index.php?uc=dash' onClick=ouvrirFenetre('".$bug->getid()."','cloture');> Terminer </a></li>";
         echo "</ul>";
     }
     ?>
     <script language="javascript">
         function ouvrirFenetre(id,action){
-            if (action=='cloture'){
 
-            window.open("http://127.0.0.1/ppe5_CAJ/index.php?uc=dash&action="action"&id="+id, "popup", "toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, width=500, height=350,screenX=200,screenY=200");
+
+            window.open("http://127.0.0.1/ppe5_CAJ/index.php?uc=dash&action="+action+"&id="+id, "popup", "toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, width=500, height=350,screenX=200,screenY=200");
 
         }
     </script>
