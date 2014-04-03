@@ -34,7 +34,7 @@
 
         echo "<li> A réaliser Avant  ".$d->format('%a jours')."</li>";
         echo "<li> <a href='http://127.0.0.1/ppe5_CAJ/index.php?uc=dash' onClick=ouvrirFenetre('".$bug->getid()."','description');> Description </a></li>";
-        echo "fffff";
+        echo "    &nbsp;&nbsp;&nbsp;";
         echo "<li> <a href='http://127.0.0.1/ppe5_CAJ/index.php?uc=dash' onClick=ouvrirFenetre('".$bug->getid()."','cloture');> Terminer </a></li>";
         echo "</ul>";
     }

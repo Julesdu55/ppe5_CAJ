@@ -3,30 +3,12 @@
 <script type="text/javascript" >
     $(document).ready(function(){
 
-        $( document ).tooltip({
-            items: "img, [data-geo], [title]",
-            content: function() {
-                var element = $( this );
-                if ( element.is( "[data-geo]" ) ) {
-                    var text = element.text();
-                    return "<img class='map' alt='" + text +
-                        "' src='http://maps.google.com/maps/api/staticmap?" +
-                        "zoom=11&size=350x350&maptype=terrain&sensor=false&center=" +
-                        text + "'>";
-                }
-                if ( element.is( "[title]" ) ) {
-                    return element.attr( "title" );
-                }
-                if ( element.is( "img" ) ) {
-                    return element.attr( "alt" );
-                }
-            }
-        });
+        // Cache les div des popup
+        $("[id^='dialog_tech']").hide();
+        $("[id^='dialog_ok'").hide();
+        $("[id^='dialog_date'").hide();
 
-        //$( document ).tooltip({
-            //track: true
-        //});
-
+        // Action du bouton affecter
         $("[id^='b_affect_']").click(function(){
             // Récuperer l'id du Bug de la ligne en question
             num = $(this).attr('id').substr(9);
@@ -38,8 +20,13 @@
             console.log(dateBug);
 
             if(idTech == ''){
-                //popup
+                // Ouvre le popup dialog_tech si le technicien n'est pas sélectionné
+                $( "#dialog_tech" ).dialog();
+            }if(dateBug == ''){
+                // Ouvre le popup dialog_date si le champ date n'est pas rempli
+                $( "#dialog_date" ).dialog();
             }else{
+                $( "#dialog_ok" ).dialog();
                 $.ajax({
                     type: "POST",
                     async:false,
@@ -49,8 +36,6 @@
                 })
             }
         })
-
-
     })
 </script>
 
@@ -67,8 +52,6 @@
         // Récuperer l'id du bug
         $Idbug = $bug->getId();
 
-        //$tooltip = "Description : ".$bug->getDescription()."// Cliquez pour voir la capture";
-        //echo "<ul id=".$Idbug." title='".$tooltip."'>";
         echo "<ul id=".$Idbug."'>";
         echo "<li><img src='./images/en_cours.png' width='30px' height='30px'/></li>";
         echo "<li>".$bug->getCreated()->format('d.m.Y')."</li>";
@@ -84,7 +67,13 @@
         }else{
             echo "<li> Date de résolution donnée: Pas de date</li>";
         }
-        echo "<br />";;
+        $image = $bug->getCapture();
+        if(isset($image)){
+        echo "<img src='./capture/".$image."' width='50' height='50'>";
+        }else{
+            echo "<img src='./capture/Pas de capture.jpg' width='50' height='50'>";
+        }
+        echo "<br />";
         echo "<select name='liste' id='liste_".$Idbug."'>";
         echo "<option value=''>Choisissez un technicien</option>";
         foreach ($users as $user){
@@ -92,8 +81,10 @@
         }
         echo "</select> ";
         echo "Date de résolution (jj/mm/YYYY)<input type=text name='dateBug' id='dateBug_".$Idbug."'>";
-        //echo "<div title = '<img src=\"".$bug->getCapture()."\">'>Voir aperçu de la capture</div>";
         echo "<input name='b_affect' id='b_affect_".$Idbug."' type='submit' value='Affecter'>";
+        echo "<div id='dialog_tech' title='Erreur'>Vous n'avez pas sélectionné de technicien</div>";
+        echo "<div id='dialog_date' title='Erreur'>Vous n'avez pas rempli le champ date</div>";
+        echo "<div id='dialog_ok' title='Erreur'>L'enregistrement a bien été pris en compte</div>";
         echo "</ul>";
     }
     ?>
