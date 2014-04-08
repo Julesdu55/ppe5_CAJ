@@ -1,5 +1,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 <script type="text/javascript" >
     $(document).ready(function(){
 
@@ -69,7 +71,7 @@
         }
         $image = $bug->getCapture();
         if(isset($image)){
-        echo "<img src='./capture/".$image."' width='50' height='50'>";
+            echo "<img src='./capture/".$image."' width='50' height='50'>";
         }else{
             echo "<img src='./capture/Pas de capture.jpg' width='50' height='50'>";
         }
@@ -99,6 +101,7 @@
         }else{
             $engineer = "non affecté";
         }
+        $Idbug = $bug->getId();
         echo "<ul id=".$Idbug." title='Description : ".$bug->getDescription()."'>";
         echo "<li><img src='./images/ferme.png' width='30px' height='30px'/></li>";
         echo "<li>".$bug->getCreated()->format('d.m.Y')."</li>";
