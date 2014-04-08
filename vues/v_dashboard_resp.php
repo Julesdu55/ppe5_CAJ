@@ -6,9 +6,10 @@
     $(document).ready(function(){
 
         // Cache les div des popup
+        $("[id^='dialog_date']").hide();
         $("[id^='dialog_tech']").hide();
-        $("[id^='dialog_ok'").hide();
-        $("[id^='dialog_date'").hide();
+        $("[id^='dialog_ok']").hide();
+
 
         // Action du bouton affecter
         $("[id^='b_affect_']").click(function(){
